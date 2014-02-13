@@ -22,12 +22,10 @@ var channelsLoaded = 0;
 // fieldList shows which field you want to load, and which axis to display that field on, 
 // the 'T' Temperature left axis, or the 'O' Other right axis.
 var channelKeys =[];
-channelKeys.push({channelNumber:9, name:'Hans my_house',key:'XXXXXXXXXXXXXXXX',
-                  fieldList:[{field:1,axis:'O'},{field:2,axis:'T'}]});
-channelKeys.push({channelNumber:5683, name:'Sam Rogers Solar System',key:'XXXXXXXXXXXXXXXX',
-   fieldList:[{field:1,axis:'T'},{field:2,axis:'T'},{field:3,axis:'T'},{field:4,axis:'T'},{field:5,axis:'T'},{field:6,axis:'T'}]});
-channelKeys.push({channelNumber:9354, name:'CRYSTAL CITY WEATHER Fault',key:'XXXXXXXXXXXXXXXX',
-   fieldList:[{field:1,axis:'T'},{field:2,axis:'O'},{field:3,axis:'O'},{field:4,axis:'O'},{field:5,axis:'O'},{field:6,axis:'O'}]});
+//Change TO: display two fields from the same channel from a Rain gauge - 15min counts, and total counts
+//  src="http://api.thingspeak.com/channels/8652/charts/3?width=1300&height=520&results=1000&dynamic=false&title=15minTotals%20(0.5mm)" ></iframe>
+channelKeys.push({channelNumber:8652, name:'RainGauge',key:'EAEX6922YVUKP3IP',
+   fieldList:[{field:3,axis:'C'},{field:7,axis:'R'}]});
     
 // user's timezone offset
 var myOffset = new Date().getTimezoneOffset();
@@ -220,7 +218,7 @@ $(document).ready(function()
 				text: 'All'
 			}],
 			inputEnabled: true,
-			selected: 1
+			selected: 4  //Change to 4th button as default
 		},
     title: {
 			text: ''
@@ -247,8 +245,10 @@ $(document).ready(function()
 		},
     tooltip: {
       valueDecimals: 1,
-      valueSuffix: '°F',
-      xDateFormat:'%Y-%m-%d<br/>%1:%M:%S %p'
+      valueSuffix: '(0.01")',
+      xDateFormat:'%Y-%m-%d<br/>%H:%M:%S %p' //bug fix
+
+
 			// reformat the tooltips so that local times are displayed
 			//formatter: function() {
       //var d = new Date(this.x + (myOffset*60000));
@@ -265,20 +265,20 @@ $(document).ready(function()
         minute: '%l:%M %p'
       },
       title: {
-        text: 'test'
+        text: 'LeftAxis'
 			}
 		},
 		yAxis: [{
             title: {
-                text: 'Temperature °F'
+                text: 'RainGauge Total (0.01")'
             },
-            id: 'T'
+            id: 'R'
     }, {
             title: {
-                text: 'Other'
+                text: '15min counts (0.01")'
             },
             opposite: true,
-            id: 'O'
+            id: 'C'
     }],
 		exporting: {
 		  enabled: true,
@@ -411,7 +411,8 @@ function loadChannelHistory(sentChannelIndex,channelNumber,key,sentFieldList,sen
 }
 
   </script>
-    <title>ThingSpeakMultichannel</title>
+  	<title>Rain Gauge - rain intentsity - experimental</title>    
+
   </head>
   <body style="                      background-color: white;">
     <div id="chart-container" style="height: 600px;"><br>
