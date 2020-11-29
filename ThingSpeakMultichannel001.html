@@ -89,7 +89,7 @@ $(document).ready(function()
    var fieldList= sentFieldList;
    var channelIndex = sentChannelIndex;
    // get the Channel data with a webservice call
- 	$.getJSON('https://www.thingspeak.com/channels/'+channelNumber+'/feed.json?callback=?&amp;offset=0&amp;results=2500;key='+key, function(data) 
+ 	$.getJSON('https://api.thingspeak.com/channels/'+channelNumber+'/feed.json?&offset=0&results=2500;key='+key, function(data)
    {
 	   // if no access
 	   if (data == '-1') {
@@ -145,7 +145,7 @@ $(document).ready(function()
                (function(channelIndex)
                {
                 // get the data with a webservice call
-                $.getJSON('https://www.thingspeak.com/channels/'+channelKeys[channelIndex].channelNumber+'/feed/last.json?callback=?&amp;offset=0&amp;location=false;key='+channelKeys[channelIndex].key, function(data) 
+                $.getJSON('https://api.thingspeak.com/channels/'+channelKeys[channelIndex].channelNumber+'/feed/last.json?offset=0&amp;location=false;key='+channelKeys[channelIndex].key, function(data) 
                 { 
                   for (var fieldIndex=0; fieldIndex<channelKeys[channelIndex].fieldList.length; fieldIndex++)
                   {
@@ -376,7 +376,7 @@ function loadChannelHistory(sentChannelIndex,channelNumber,key,sentFieldList,sen
    window.console && console.log('sentChannelIndex:',sentChannelIndex);
    window.console && console.log('numLoads:',numLoads);
    // get the Channel data with a webservice call
- 	$.getJSON('https://www.thingspeak.com/channels/'+channelNumber+'/feed.json?callback=?&amp;offset=0&amp;start=2013-01-20T00:00:00;end='+end+';key='+key, function(data) 
+ 	$.getJSON('https://api.thingspeak.com/channels/'+channelNumber+'/feed.json?offset=0&amp;start=2013-01-20T00:00:00;end='+end+';key='+key, function(data) 
    {
 	   // if no access
 	   if (data == '-1') {
