@@ -159,9 +159,9 @@ $(document).ready(function()
                       p[0] = getChartDate(data.created_at);
                       p[1] = parseFloat(v);
                       // get the last date if possible
-                      if (dynamicChart.series[chartSeriesIndex].data.length > 0) 
+                      if (dynamicChart.series[chartSeriesIndex].xData.length > 0) 
                       { 
-                        last_date = dynamicChart.series[chartSeriesIndex].data[dynamicChart.series[chartSeriesIndex].data.length-1].x; 
+                        last_date = dynamicChart.series[chartSeriesIndex].xData[dynamicChart.series[chartSeriesIndex].xData.length-1]; 
                       }
                       var shift = false ; //default for shift
                       // if a numerical value exists and it is a new date, add it
